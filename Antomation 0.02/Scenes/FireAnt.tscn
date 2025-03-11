@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dd2qnc7gqe3yi"]
+
+[ext_resource type="Script" uid="uid://dgttb1olee2kh" path="res://Scripts/Classes/Fire.gd" id="1_bp3fq"]
+[ext_resource type="Script" uid="uid://df1tackme2rys" path="res://Scripts/Hitbox.gd" id="2_jmwci"]
+[ext_resource type="SpriteFrames" uid="uid://cntnrtxf03d7u" path="res://Resources/Sprites/AntAnims.tres" id="3_brfrn"]
+[ext_resource type="Script" uid="uid://b10lrgner44b6" path="res://Scripts/Hurtbox.gd" id="4_jmwci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isxm3"]
+size = Vector2(13.875, 12)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4c8sp"]
+radius = 3.0
+height = 15.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmwci"]
+radius = 5.75
+height = 16.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmwci"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brfrn"]
+size = Vector2(13.875, 12)
+
+[node name="FireAnt" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_bp3fq")
+metadata/_custom_type_script = "uid://dgttb1olee2kh"
+
+[node name="Move" type="Timer" parent="."]
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -4)
+script = ExtResource("2_jmwci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4.9375, 2)
+shape = SubResource("RectangleShape2D_isxm3")
+disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4c8sp")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = ExtResource("3_brfrn")
+animation = &"fire_move"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -4)
+script = ExtResource("4_jmwci")
+metadata/_custom_type_script = "uid://b10lrgner44b6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 1.25)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jmwci")
+
+[node name="ScanArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea"]
+shape = SubResource("CircleShape2D_jmwci")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(5, -2)
+shape = SubResource("RectangleShape2D_brfrn")

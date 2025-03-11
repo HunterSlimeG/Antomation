@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci8bu2nrume0y"]
+
+[ext_resource type="Script" uid="uid://yu4igfrnlr0v" path="res://Scripts/Main.gd" id="1_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://dygva3l25u2d1" path="res://Scenes/BlackAnt.tscn" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://cgiw73uhhp0cx" path="res://Scripts/Camera.gd" id="2_kln2b"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rgh2o")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(563, 280)
+script = ExtResource("2_kln2b")
+
+[node name="BlackAnt" parent="." instance=ExtResource("2_idj7w")]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(502, 288)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
