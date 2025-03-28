@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdrleh6s7wwas"]
+
+[ext_resource type="Script" uid="uid://disfi1ib54yrr" path="res://Scripts/NA1.gd" id="1_e7mbg"]
+[ext_resource type="Script" uid="uid://cgiw73uhhp0cx" path="res://Scripts/Camera.gd" id="2_8mwpt"]
+[ext_resource type="TileSet" uid="uid://bw7nu0x2tk2rb" path="res://Resources/Sprites/Tiles.tres" id="3_twyea"]
+[ext_resource type="PackedScene" uid="uid://dygva3l25u2d1" path="res://Scenes/BlackAnt.tscn" id="4_svjyp"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_e7mbg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(563, 280)
+script = ExtResource("2_8mwpt")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(362, 15)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Foreground" type="TileMapLayer" parent="."]
+z_index = 10
+position = Vector2(343, 456)
+scale = Vector2(4, 4)
+tile_set = ExtResource("3_twyea")
+
+[node name="Collision" type="TileMapLayer" parent="."]
+position = Vector2(343, 456)
+scale = Vector2(4, 4)
+tile_set = ExtResource("3_twyea")
+
+[node name="Background" type="TileMapLayer" parent="."]
+self_modulate = Color(0.572988, 0.572988, 0.572988, 1)
+z_index = -10
+position = Vector2(343, 456)
+scale = Vector2(4, 4)
+tile_set = ExtResource("3_twyea")
+
+[node name="BlackAnt" parent="." instance=ExtResource("4_svjyp")]
+position = Vector2(686, 251)
+floor_max_angle = 0.785398
+Team = "Spawner2"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

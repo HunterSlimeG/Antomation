@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2ko04e3h4vc0"]
+
+[ext_resource type="Script" uid="uid://bdmh0widmpn3i" path="res://Scripts/Classes/LeafCutter.gd" id="1_g0lof"]
+[ext_resource type="Script" uid="uid://df1tackme2rys" path="res://Scripts/Hitbox.gd" id="2_52elf"]
+[ext_resource type="SpriteFrames" uid="uid://cntnrtxf03d7u" path="res://Resources/Sprites/AntAnims.tres" id="3_meg3d"]
+[ext_resource type="Script" uid="uid://b10lrgner44b6" path="res://Scripts/Hurtbox.gd" id="4_3ae1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0lof"]
+size = Vector2(22.1875, 20.125)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0lof"]
+radius = 12.5
+height = 33.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3qt57"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjgey"]
+size = Vector2(22.1875, 20.125)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j4qb5"]
+radius = 7.25
+height = 25.5
+
+[node name="LeafCutterAnt" type="CharacterBody2D"]
+position = Vector2(0, -7)
+scale = Vector2(4, 4)
+motion_mode = 1
+script = ExtResource("1_g0lof")
+metadata/_custom_type_script = "uid://bdmh0widmpn3i"
+
+[node name="Move" type="Timer" parent="."]
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 1.75)
+script = ExtResource("2_52elf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(12.3438, 0.0625)
+shape = SubResource("RectangleShape2D_g0lof")
+disabled = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = ExtResource("3_meg3d")
+animation = &"leafcutter_attack"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 1.75)
+script = ExtResource("4_3ae1o")
+metadata/_custom_type_script = "uid://b10lrgner44b6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -2.75)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_g0lof")
+
+[node name="ScanArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea"]
+shape = SubResource("CircleShape2D_3qt57")
+
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(0, 1.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(12.3438, 0.0625)
+shape = SubResource("RectangleShape2D_bjgey")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 4.25)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j4qb5")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc3ueg8uwf2an"]
+
+[ext_resource type="Script" uid="uid://b860oonhes2dk" path="res://HoneyPot.gd" id="1_1gwfg"]
+[ext_resource type="Script" uid="uid://df1tackme2rys" path="res://Scripts/Hitbox.gd" id="2_70xwq"]
+[ext_resource type="SpriteFrames" uid="uid://cntnrtxf03d7u" path="res://Resources/Sprites/AntAnims.tres" id="3_li7ue"]
+[ext_resource type="Script" uid="uid://b10lrgner44b6" path="res://Scripts/Hurtbox.gd" id="4_c32l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eablw"]
+size = Vector2(0, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ne5ox"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ughrl"]
+radius = 5.0
+height = 16.5
+
+[node name="HoneyPotAnt" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_1gwfg")
+metadata/_custom_type_script = "uid://b860oonhes2dk"
+
+[node name="Move" type="Timer" parent="."]
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -4.25)
+script = ExtResource("2_70xwq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_eablw")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9, -10)
+sprite_frames = ExtResource("3_li7ue")
+animation = &"honeypot_collect"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -4.25)
+script = ExtResource("4_c32l2")
+metadata/_custom_type_script = "uid://b10lrgner44b6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 5.25)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ne5ox")
+
+[node name="ScanArea" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea"]
+shape = SubResource("RectangleShape2D_eablw")
+
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(0, -4.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_eablw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ughrl")

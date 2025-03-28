@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://0bjn2dmjqglx"]
+
+[ext_resource type="Script" uid="uid://djos7cra13cmg" path="res://Scripts/Main_Menu.gd" id="1_c4tk2"]
+[ext_resource type="FontFile" uid="uid://b06cviam43baj" path="res://Resources/Misc/PixelOperator8-Bold.ttf" id="2_rmbjf"]
+
+[sub_resource type="Theme" id="Theme_b7rmo"]
+Button/fonts/font = ExtResource("2_rmbjf")
+
+[node name="Main_Menu" type="Node2D"]
+script = ExtResource("1_c4tk2")
+playScene = "NA1"
+
+[node name="Play" type="AspectRatioContainer" parent="."]
+offset_top = 600.0
+offset_right = 960.0
+offset_bottom = 650.0
+scale = Vector2(2, 2)
+theme = SubResource("Theme_b7rmo")
+ratio = 2.0
+stretch_mode = 1
+
+[node name="Play" type="Button" parent="Play"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="AspectRatioContainer" parent="."]
+offset_top = 712.0
+offset_right = 1280.0
+offset_bottom = 762.0
+scale = Vector2(1.5, 1.5)
+theme = SubResource("Theme_b7rmo")
+ratio = 2.0
+stretch_mode = 1
+
+[node name="Settings" type="Button" parent="Settings"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="Quit" type="AspectRatioContainer" parent="."]
+offset_top = 800.0
+offset_right = 1280.0
+offset_bottom = 850.0
+scale = Vector2(1.5, 1.5)
+theme = SubResource("Theme_b7rmo")
+ratio = 2.0
+stretch_mode = 1
+
+[node name="Quit" type="Button" parent="Quit"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Play/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Settings/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Quit/Quit" to="." method="_on_quit_pressed"]
